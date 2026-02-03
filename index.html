@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Exam Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="day-mode">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <h2>Loading Exam Portal...</h2>
+    </div>
+
+    <!-- Main Container -->
+    <div id="app-container" class="app-container hidden">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span id="website-name">Live Exam Portal</span>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn" data-page="home">Home</button>
+                <button class="nav-btn" data-page="exams">Exams</button>
+                <button class="nav-btn" data-page="learning">Learning</button>
+                <button class="nav-btn" data-page="ai-board">AI Board</button>
+                <button class="nav-btn" data-page="profile">Profile</button>
+                <button class="mode-toggle" onclick="toggleMode()" title="Toggle Day/Night Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="admin-btn" onclick="showAdminLogin()" title="Admin Panel">
+                    <i class="fas fa-lock"></i>
+                </button>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Page -->
+            <section id="home-page" class="page active">
+                <div class="hero-section">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Welcome to Live Exam Portal</h1>
+                        <p class="hero-subtitle">Experience seamless online examinations with advanced AI assistance and learning tools</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" onclick="navigateTo('exams')">Start Exam</button>
+                            <button class="btn btn-secondary" onclick="navigateTo('learning')">Start Learning</button>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img id="homepage-image" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Exam Portal">
+                    </div>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-timer"></i>
+                        <h3>Live Exams</h3>
+                        <p>Real-time examination experience with automatic submission</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-book-open"></i>
+                        <h3>Learning Center</h3>
+                        <p>Comprehensive study materials and resources</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-robot"></i>
+                        <h3>AI Assistance</h3>
+                        <p>Intelligent learning support and guidance</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-user-shield"></i>
+                        <h3>Secure Platform</h3>
+                        <p>Advanced security and proctoring features</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exams Page -->
+            <section id="exams-page" class="page">
+                <div class="page-header">
+                    <h2>Live Examinations</h2>
+                    <p>Join or create live exams with secure access</p>
+                </div>
+
+                <div class="exams-container">
+                    <div class="exam-search">
+                        <input type="text" id="exam-search" placeholder="Search for exams..." onkeyup="filterExams()">
+                    </div>
+
+                    <div id="exams-list" class="exams-grid">
+                        <!-- Exam cards will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Exam Modal -->
+                <div id="exam-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal()">&times;</span>
+                        <h3>Enter Exam Password</h3>
+                        <input type="password" id="exam-password" placeholder="Enter exam password">
+                        <button onclick="joinExam()">Join Exam</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Learning Page -->
+            <section id="learning-page" class="page">
+                <div class="page-header">
+                    <h2>Learning Center</h2>
+                    <p>Access study materials and resources</p>
+                </div>
+
+                <div class="learning-container">
+                    <div class="learning-sections">
+                        <div class="learning-card">
+                            <i class="fas fa-video"></i>
+                            <h3>Video Tutorials</h3>
+                            <p>Watch comprehensive video lessons</p>
+                        </div>
+                        <div class="learning-card">
+                            <i class="fas fa-file-alt"></i>
+                            <h3>Study Materials</h3>
+                            <p>Download PDFs and documents</p>
+                        </div>
+                        <div class="learning-card">
+                            <i class="fas fa-question-circle"></i>
+                            <h3>Practice Tests</h3>
+                            <p>Take practice exams to prepare</p>
+                        </div>
+                        <div class="learning-card">
+                            <i class="fas fa-chart-bar"></i>
+                            <h3>Progress Tracking</h3>
+                            <p>Monitor your learning progress</p>
+                        </div>
+                    </div>
+
+                    <div class="learning-content">
+                        <h3>Featured Content</h3>
+                        <div id="featured-content" class="content-grid">
+                            <!-- Content will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Board Page -->
+            <section id="ai-board-page" class="page">
+                <div class="page-header">
+                    <h2>AI Learning Assistant</h2>
+                    <p>Get help with your studies and questions</p>
+                </div>
+
+                <div class="ai-board-container">
+                    <div class="chat-container">
+                        <div id="chat-messages" class="chat-messages">
+                            <div class="message bot-message">
+                                <i class="fas fa-robot"></i>
+                                <div class="message-content">
+                                    <strong>AI Assistant:</strong>
+                                    <p>Hello! I'm here to help with your learning. Ask me anything about your studies!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input">
+                            <input type="text" id="ai-query" placeholder="Ask a question about your studies..." onkeypress="handleAIKeyPress(event)">
+                            <button onclick="sendAIQuery()"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Page -->
+            <section id="profile-page" class="page">
+                <div class="page-header">
+                    <h2>Student Profile</h2>
+                    <p>Manage your account and preferences</p>
+                </div>
+
+                <div class="profile-container">
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img id="student-avatar" src="https://via.placeholder.com/150" alt="Student Avatar">
+                            <div class="upload-overlay">
+                                <i class="fas fa-camera"></i>
+                                <span>Change Photo</span>
+                            </div>
+                            <input type="file" id="avatar-upload" accept="image/*" onchange="uploadAvatar(event)">
+                        </div>
+
+                        <div class="profile-info">
+                            <h3 id="student-name">John Doe</h3>
+                            <p id="student-email">john@example.com</p>
+
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <h4>Exams Taken</h4>
+                                    <p id="exams-count">0</p>
+                                </div>
+                                <div class="stat-card">
+                                    <h4>Average Score</h4>
+                                    <p id="avg-score">0%</p>
+                                </div>
+                                <div class="stat-card">
+                                    <h4>Learning Hours</h4>
+                                    <p id="learning-hours">0</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recent-activity">
+                        <h3>Recent Activity</h3>
+                        <div id="activity-feed" class="activity-list">
+                            <!-- Activities will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Admin Login Modal -->
+        <div id="admin-login-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeAdminLogin()">&times;</span>
+                <h3>Admin Login</h3>
+                <input type="password" id="admin-password" placeholder="Enter admin password">
+                <button onclick="loginAdmin()">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

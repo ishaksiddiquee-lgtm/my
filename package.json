@@ -1,0 +1,42 @@
+{
+  "name": "live-exam-portal",
+  "version": "2.0.0",
+  "description": "A comprehensive online examination platform with modern UI, animations, and full functionality for both students and administrators.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo 'Build completed'",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": [
+    "exam",
+    "portal",
+    "education",
+    "online-exam",
+    "learning",
+    "student",
+    "admin",
+    "quiz",
+    "assessment",
+    "night-mode",
+    "animations"
+  ],
+  "author": "Live Exam Portal Developer",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.22.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "serve": "^14.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/live-exam-portal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/live-exam-portal/issues"
+  },
+  "homepage": "https://github.com/yourusername/live-exam-portal#readme"
+}
